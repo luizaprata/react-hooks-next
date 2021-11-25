@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import EmailValitatingForm from '../src/EmailValitatingForm'
+
 const InputElement = () => {
   const [inputText, setInputText] = useState("");
   const [history, setHistory] = useState([]);
@@ -17,6 +19,7 @@ const InputElement = () => {
       <ul>
         {history.map(e => <li>{e}</li>)}
       </ul>
+      <EmailValitatingForm />
     </>
   );
 };
