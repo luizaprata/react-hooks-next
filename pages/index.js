@@ -1,29 +1,13 @@
-import React, { useCallback, useEffect, useReducer, useState } from "react";
+import React, { useState } from "react";
 
 import EmailValitatingForm from '../src/EmailValitatingForm'
-import speakerReducer from "../src/speakerReducer";
+import useSpeakerDataManager from "../src/useSpeakerDataManager";
 
 const InputElement = () => {
   const [inputText, setInputText] = useState("");
   const [history, setHistory] = useState([]);
 
-  const [{ isLoading, speakerList }, dispatch] = useReducer(speakerReducer, { isLoading: true, speakerList: [] })
-
-  useEffect(() => {
-    new Promise((resolve) => {
-      setTimeout(() => resolve(), 1000)
-    }).then(() => dispatch({ type: 'setSpeakerList', data: [{ id:1, name: "luiza" }, { id:123, name: "antonio" }] }))
-  }, [])
-
-  const favoriteHandler = useCallback((e) => {
-    e.preventDefault();
-    const sessionId = parseInt(e.target.attributes['data-id'].value)
-
-    dispatch({
-      type: 'toggle-favorite',
-      id: sessionId
-    })
-  })
+  const { isLoading, speakerList, favoriteHandler } = useSpeakerDataManager()
 
   if (isLoading) return <p>loading</p>
 
