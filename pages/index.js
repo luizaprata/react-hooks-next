@@ -7,7 +7,7 @@ const InputElement = () => {
   const [inputText, setInputText] = useState("");
   const [history, setHistory] = useState([]);
 
-  const { isLoading, speakerList, favoriteHandler } = useSpeakerDataManager()
+  const { isLoading, speakerList, toggleFavorite } = useSpeakerDataManager()
 
   if (isLoading) return <p>loading</p>
 
@@ -18,7 +18,7 @@ const InputElement = () => {
           return (
             <div>
               <p key={idx}>{speaker.name}</p>
-              <button data-id={speaker.id} onClick={favoriteHandler}>{speaker.favorite ? 'favorite' : 'unfavorite'}</button>
+              <button onClick={()=>toggleFavorite(speaker)}>{speaker.favorite ? 'unfavorite' : 'favorite'}</button>
             </div>
           )
         })}

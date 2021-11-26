@@ -12,17 +12,15 @@ function useSpeakerDataManager() {
         }).then(() => dispatch({ type: 'setSpeakerList', data: [{ id: 1, name: "luiza" }, { id: 123, name: "antonio" }] }))
     }, [])
 
-    const favoriteHandler = useCallback((e) => {
-        e.preventDefault();
-        const sessionId = parseInt(e.target.attributes['data-id'].value)
+    const toggleFavorite = useCallback((speaker) => {
 
         dispatch({
-            type: 'toggle-favorite',
-            id: sessionId
+            type: speaker.favorite ? 'unfavorite' : 'favorite',
+            id: speaker.id
         })
     })
 
-    return { isLoading, speakerList, favoriteHandler }
+    return { isLoading, speakerList, toggleFavorite }
 }
 
 export default useSpeakerDataManager
